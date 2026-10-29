@@ -1,141 +1,151 @@
 /* Bar Joan · estilos compartidos por las tres versiones de idioma.
-   Estilo "mercado": mosaico de colores del tejado de Santa Caterina, letra condensada en mayúsculas,
-   menú en pizarra y tarjetas sobre papel. Colores: cambia aquí la paleta y se aplica en toda la web. */
+   Inspirado en el propio bar: rótulo crema con letras naranjas, barra de madera naranja,
+   perfiles de acero inoxidable y taburetes. Colores: cambia aquí la paleta y se aplica en toda la web. */
 :root {
-  --verde: #1f5c3a;
-  --verde-osc: #143d27;
-  --mostaza: #e6b84f;
-  --teja: #c8553d;
-  --azul: #3a6ea5;
-  --papel: #faf6ec;
-  --tinta: #1d2419;
-  --pizarra: #22302a;
-  --titulos: "Avenir Next Condensed", "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  --rotulo: #fbf4e6;       /* crema del rótulo */
+  --naranja: #c2461e;      /* letras del rótulo (oscurecido para buen contraste) */
+  --madera: #9a3c1c;       /* paneles de la barra */
+  --madera-osc: #5e2511;
+  --acero: linear-gradient(180deg, #f2f4f5, #b9bfc4 45%, #8d949a 55%, #d7dbde);
+  --acero-plano: #a9b0b6;
+  --pizarra: #26292b;
+  --tinta: #2a1d16;
+  --titulos: Rockwell, "Rockwell Extra Bold", "Roboto Slab", Clarendon, "Bookman Old Style", Georgia, serif;
   --texto: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* Mosaico de 4 colores, como las tejas del mercado */
-  --mosaico: conic-gradient(var(--mostaza) 0 25%, var(--teja) 0 50%, var(--verde) 0 75%, var(--azul) 0);
+  /* Paneles de madera de la barra: vetas suaves y juntas verticales cada 160 px */
+  --paneles: repeating-linear-gradient(90deg, transparent 0 156px, rgba(0, 0, 0, .28) 156px 160px),
+             repeating-linear-gradient(180deg, rgba(255, 255, 255, .04) 0 3px, transparent 3px 9px);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
-body { margin: 0; background: var(--papel); color: var(--tinta); font: 1.0625rem/1.6 var(--texto); }
+html { scroll-behavior: smooth; scroll-padding-top: 7.5rem; }
+body { margin: 0; background: var(--rotulo); color: var(--tinta); font: 1.0625rem/1.6 var(--texto); }
 img { max-width: 100%; height: auto; display: block; }
-a { color: var(--verde); }
-h1, h2, h3 { font-family: var(--titulos); font-weight: 800; text-transform: uppercase; letter-spacing: .02em; line-height: 1.05; margin: 0 0 .6em; }
-h2 { font-size: clamp(2rem, 7vw, 3rem); color: var(--verde); }
-h2::after { content: ""; display: block; width: 84px; height: 8px; margin-top: .35em; background: var(--mosaico) 0 0 / 16px 16px; border-radius: 4px; }
-h3 { font-size: 1.3rem; }
-h3 small { font-family: var(--texto); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: .8rem; opacity: .85; }
+a { color: var(--naranja); }
+h1, h2, h3 { font-family: var(--titulos); font-weight: 800; line-height: 1.1; margin: 0 0 .6em; }
+h2 { font-size: clamp(1.9rem, 6.5vw, 2.8rem); color: var(--naranja); text-transform: uppercase; letter-spacing: .03em; }
+h2::after { content: ""; display: block; width: 90px; height: 6px; margin-top: .4em; background: var(--acero); border-radius: 3px; }
+h3 { font-size: 1.25rem; }
+h3 small { font-family: var(--texto); font-weight: 400; font-size: .8rem; opacity: .85; }
 .wrap { max-width: 64rem; margin: 0 auto; padding: 0 16px; }
 section { padding: 3.5rem 0; }
 
 /* Accesibilidad: foco visible sobre fondo claro y oscuro, y salto al contenido */
-:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; box-shadow: 0 0 0 6px var(--papel); }
-.skip { position: absolute; left: -999px; top: 0; background: var(--tinta); color: var(--papel); padding: .75rem 1rem; z-index: 20; }
+:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; box-shadow: 0 0 0 6px var(--rotulo); }
+.skip { position: absolute; left: -999px; top: 0; background: var(--tinta); color: var(--rotulo); padding: .75rem 1rem; z-index: 20; }
 .skip:focus { left: 0; }
 
 /* Marcador de datos que faltan: visible a propósito */
 .pending { background: #fff3a6; color: #3a2a00; border: 1px dashed #8a6d00; padding: 0 .3em; border-radius: 3px; font-size: .9em; }
 
-/* Cabecera clara con franja de mosaico */
-.top { position: sticky; top: 0; z-index: 10; background: var(--papel); box-shadow: 0 2px 10px rgba(0, 0, 0, .06); }
-.top::after { content: ""; display: block; height: 6px; background: var(--mosaico) 0 0 / 20px 20px; }
-.top a { color: var(--verde-osc); text-decoration: none; }
-.top-in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; }
-.brand { font: 800 1.6rem var(--titulos); text-transform: uppercase; letter-spacing: .04em; }
+/* Cabecera = el rótulo del bar: crema, letras naranjas y perfil de acero debajo */
+.top { position: sticky; top: 0; z-index: 10; background: var(--rotulo); box-shadow: 0 3px 12px rgba(0, 0, 0, .12); }
+.top::after { content: ""; display: block; height: 6px; background: var(--acero); }
+.top a { color: var(--tinta); text-decoration: none; }
+.top-in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.75rem; }
+.brand { display: flex; flex-direction: column; align-items: flex-start; gap: 0; line-height: 1; font: 800 1.7rem var(--titulos); text-transform: uppercase; letter-spacing: .06em; }
+.top .brand { color: var(--naranja); }
+/* Lo que pone el rótulo de verdad */
+.brand::after { content: "Esmorzars · Menjars"; font-size: .62rem; letter-spacing: .14em; color: var(--tinta); }
 .langs { display: flex; gap: .25rem; }
-.langs a { padding: .35rem .6rem; border-radius: 999px; font-size: .85rem; font-weight: 700; border: 2px solid transparent; }
-.langs a[aria-current] { border-color: var(--verde); background: var(--verde); color: var(--papel); }
-.menu .wrap { display: flex; gap: .5rem; overflow-x: auto; white-space: nowrap; padding-bottom: .6rem; scrollbar-width: none; }
+.langs a { padding: .3rem .55rem; border-radius: 4px; font-size: .85rem; font-weight: 700; }
+.langs a[aria-current] { background: var(--naranja); color: #fff; }
+.menu { border-top: 1px solid #eadfca; }
+.menu .wrap { display: flex; gap: 1.25rem; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
 .menu .wrap::-webkit-scrollbar { display: none; }
-.menu a { display: inline-block; padding: .35rem .8rem; border-radius: 999px; background: #efe8d6; font-size: .9rem; font-weight: 600; }
-.menu a:hover { background: var(--mostaza); }
+.menu a { display: inline-block; padding: .55rem 0; font-size: .95rem; font-weight: 600; border-bottom: 3px solid transparent; }
+.menu a:hover { border-color: var(--naranja); }
 
-/* Botones en píldora (mínimo 48 px de alto para el dedo) */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .7rem 1.5rem;
-  border-radius: 999px; font-weight: 800; text-decoration: none; background: var(--mostaza); color: var(--tinta); border: 2px solid var(--mostaza); }
-.btn:hover { background: #f0c868; }
-.btn-alt { background: transparent; color: var(--papel); border-color: var(--papel); }
-.btn-alt:hover { background: var(--papel); color: var(--verde-osc); }
+/* Botones: naranja del rótulo y acero */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .7rem 1.4rem;
+  border-radius: 6px; font-weight: 800; text-decoration: none; background: var(--naranja); color: #fff; border: 2px solid var(--naranja);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .2); }
+.btn:hover { background: #a93a16; border-color: #a93a16; }
+.btn-alt { background: var(--acero); color: var(--tinta); border-color: #8d949a; }
+.btn-alt:hover { background: #fff; border-color: #fff; }
 .btns { display: flex; flex-wrap: wrap; gap: .75rem; }
 
-/* Portada: bloque de texto sobre verde y foto debajo (al lado en escritorio) */
-.hero { display: flex; flex-direction: column-reverse; padding: 0; background: var(--verde); color: var(--papel); }
-.hero-txt { padding: 2.5rem 0 2.75rem; }
-.hero h1 { font-size: clamp(3.5rem, 18vw, 6.5rem); margin-bottom: .1em; color: var(--papel); }
-.lema { font-size: clamp(1.15rem, 4.5vw, 1.5rem); max-width: 30rem; margin: 0 0 1.75rem; }
+/* Portada = la barra: paneles de madera naranja con el rótulo encima */
+.hero { display: flex; flex-direction: column-reverse; padding: 0; background: var(--paneles), var(--madera); color: #fff; border-bottom: 10px solid transparent;
+  border-image: linear-gradient(180deg, #f2f4f5, #8d949a) 10; }
+.hero-txt { padding: 2.25rem 0 2.5rem; }
+.hero h1 { display: inline-block; margin: 0 0 1rem; padding: .15em .45em .1em; background: var(--rotulo); color: var(--naranja);
+  font-size: clamp(2.4rem, 11.5vw, 5.5rem); white-space: nowrap; text-transform: uppercase; letter-spacing: .06em; border: 4px solid var(--acero-plano);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35); }
+.lema { font-size: clamp(1.15rem, 4.5vw, 1.45rem); max-width: 30rem; margin: 0 0 1.75rem; text-shadow: 0 1px 2px rgba(0, 0, 0, .4); }
 .hero-media, .hero-media img, .hero-media .ph { width: 100%; min-height: 240px; object-fit: cover; }
 
-/* Huecos de foto mientras no estén las del cliente */
+/* Huecos de foto mientras no estén las del cliente: madera oscura */
 .ph { display: flex; flex-direction: column; justify-content: center; gap: .4rem; padding: 1rem; aspect-ratio: 4 / 3;
-  background: linear-gradient(rgba(20, 61, 39, .82), rgba(20, 61, 39, .82)), var(--mosaico) 0 0 / 28px 28px; color: var(--papel); font-size: .9rem; }
+  background: var(--paneles), var(--madera-osc); color: var(--rotulo); font-size: .9rem; }
 .hero-media .ph { aspect-ratio: auto; justify-content: flex-start; }
 
-/* Nosotros: tarjeta (con margen lateral en móvil) */
+/* Nosotros: tarjeta con perfil de acero arriba */
 #nosotros .wrap, #about .wrap, #nosaltres .wrap, #menu .wrap { width: calc(100% - 24px); }
-#nosotros .wrap, #about .wrap, #nosaltres .wrap { background: #fff; border-radius: 20px; padding: 2rem 1.25rem; box-shadow: 0 6px 24px rgba(0, 0, 0, .06); }
+#nosotros .wrap, #about .wrap, #nosaltres .wrap { background: #fff; padding: 2rem 1.25rem; border-top: 8px solid transparent;
+  border-image: var(--acero) 8; box-shadow: 0 6px 24px rgba(0, 0, 0, .08); }
 
-/* Menú en pizarra */
-#menu .wrap { background: var(--pizarra); color: #f3efe4; border-radius: 20px; padding: 2rem 1.25rem; border: 10px solid #7a5a3a; }
+/* Menú en la pizarra de la barra, con marco de acero */
+#menu .wrap { background: var(--pizarra); color: #f1ede4; padding: 2rem 1.25rem; border: 8px solid var(--acero-plano); border-radius: 6px;
+  box-shadow: inset 0 0 0 2px #e5e8ea, 0 8px 24px rgba(0, 0, 0, .2); }
 #menu h2 { color: #fff; }
-#menu h3 { color: var(--mostaza); }
-#menu a { color: var(--mostaza); }
+#menu h3 { color: #ff9a6b; }
+#menu a { color: #ff9a6b; }
 .aviso { margin-bottom: 2rem; }
 .carta { display: grid; gap: 2rem; }
 .carta ul { list-style: none; margin: 0; padding: 0; }
 .carta li { display: flex; align-items: baseline; gap: .5rem; padding: .45rem 0; border-bottom: 1px dashed rgba(255, 255, 255, .25); }
 .carta li span:first-child { flex: 1; }
-.carta li span:last-child { white-space: nowrap; font: 800 1.35rem var(--titulos); color: var(--mostaza); }
+.carta li span:last-child { white-space: nowrap; font: 800 1.3rem var(--titulos); color: #fff; }
 .carta li span.pending:last-child { font: inherit; font-size: .9em; color: #3a2a00; }
 
-/* Galería en mosaico */
+/* Galería */
 .galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
-.galeria img, .galeria .ph { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
-.galeria > :first-child { grid-column: span 2; aspect-ratio: 16 / 9; }
+.galeria img, .galeria .ph { width: 100%; height: 100%; object-fit: cover; border: 4px solid var(--acero-plano); }
 
 /* Horario y mapa */
 .horario { display: grid; gap: 2rem; }
-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; margin-bottom: 1.5rem; border-radius: 14px; overflow: hidden; box-shadow: 0 6px 24px rgba(0, 0, 0, .06); }
-th, td { text-align: left; padding: .8rem .9rem; border-bottom: 1px solid #ece5d2; }
-thead th { background: var(--mostaza); color: var(--tinta); font-family: var(--titulos); text-transform: uppercase; letter-spacing: .04em; }
-tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+table { width: 100%; border-collapse: collapse; background: #fff; margin-bottom: 1.5rem; box-shadow: 0 6px 24px rgba(0, 0, 0, .08); }
+th, td { text-align: left; padding: .8rem .9rem; border-bottom: 1px solid #eadfca; }
+thead th { background: var(--naranja); color: #fff; font-family: var(--titulos); text-transform: uppercase; letter-spacing: .05em; }
 address { font-style: normal; margin-bottom: 1rem; }
-.mapa { aspect-ratio: 4 / 3; background: var(--verde-osc); color: var(--papel); border-radius: 20px; overflow: hidden;
+.mapa { aspect-ratio: 4 / 3; background: var(--paneles), var(--madera-osc); color: var(--rotulo); border: 6px solid var(--acero-plano); overflow: hidden;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; text-align: center; }
 .mapa iframe { width: 100%; height: 100%; border: 0; }
 .mapa p { margin: 0; font-size: .95rem; }
-.mapa a { color: var(--mostaza); }
+.mapa a { color: #ffb38f; }
 
-/* Contacto: banda verde */
-.contacto { background: var(--verde); color: var(--papel); }
-.contacto h2 { color: var(--papel); }
-.contacto .btn { width: 100%; font-size: 1.1rem; min-height: 3.75rem; }
+/* Contacto: otra vez la madera de la barra */
+.contacto { background: var(--paneles), var(--madera); color: #fff; }
+.contacto h2 { color: #fff; }
+.contacto .btn { width: 100%; font-size: 1.1rem; min-height: 3.75rem; background: var(--rotulo); color: var(--naranja); border-color: var(--rotulo); }
+.contacto .btn:hover { background: #fff; }
 .contacto .btns { display: grid; gap: .75rem; max-width: 28rem; }
 
-/* Pie */
-footer { background: var(--mosaico) 0 0 / 20px 20px repeat-x, var(--tinta); color: var(--papel); padding: 3.5rem 0 1.5rem; font-size: .95rem; }
-footer a { color: var(--papel); }
+/* Pie: madera oscura con perfil de acero */
+footer { background: var(--madera-osc); color: var(--rotulo); padding: 2.5rem 0 1.5rem; font-size: .95rem; border-top: 8px solid transparent; border-image: var(--acero) 8; }
+footer a { color: var(--rotulo); }
 footer ul { list-style: none; padding: 0; margin: 1rem 0; display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
 
 /* Páginas legales */
 .legal { padding: 2.5rem 0 4rem; max-width: 46rem; }
-.legal h1 { color: var(--verde); font-size: 2.4rem; }
-.legal h2 { font-size: 1.4rem; margin-top: 1.75rem; }
+.legal h1 { color: var(--naranja); font-size: 2.3rem; }
+.legal h2 { font-size: 1.35rem; margin-top: 1.75rem; }
 
-/* Botón fijo de llamar: solo en móvil */
-.callbar { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 15; display: flex; justify-content: center; align-items: center;
-  gap: .5rem; min-height: 3.25rem; padding-bottom: env(safe-area-inset-bottom); background: var(--mostaza); color: var(--tinta);
-  font-weight: 800; font-size: 1.1rem; text-decoration: none; border-radius: 999px; box-shadow: 0 6px 20px rgba(0, 0, 0, .25); }
-body.home { padding-bottom: 4.5rem; }
+/* Botón fijo de llamar: solo en móvil (naranja con perfil de acero) */
+.callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 15; display: flex; justify-content: center; align-items: center;
+  gap: .5rem; min-height: 3.5rem; padding-bottom: env(safe-area-inset-bottom); background: var(--naranja); color: #fff;
+  font-weight: 800; font-size: 1.1rem; text-decoration: none; border-top: 5px solid transparent; border-image: var(--acero) 5; }
+body.home { padding-bottom: 4rem; }
 
 @media (min-width: 48em) {
   .callbar { display: none; }
   body.home { padding-bottom: 0; }
   .hero { flex-direction: row-reverse; align-items: stretch; }
-  .hero-txt { flex: 1.1; display: flex; align-items: center; padding: 4rem 0; }
-  .hero-media { flex: 1; }
-  .hero-media .ph, .hero-media img { height: 100%; min-height: 460px; }
+  .brand { flex-direction: row; align-items: baseline; gap: .6rem; }
+  .hero-txt { flex: 1.15; display: flex; align-items: center; padding: 4rem 0; }
+  .hero-media { flex: 1; border-left: 10px solid var(--acero-plano); }
+  .hero-media .ph, .hero-media img { height: 100%; min-height: 440px; }
   .galeria { grid-template-columns: repeat(3, 1fr); }
-  .galeria > :first-child { grid-row: span 2; grid-column: span 1; aspect-ratio: auto; }
   .carta { grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; }
   #menu .wrap, #nosotros .wrap, #about .wrap, #nosaltres .wrap { padding: 2.5rem; }
   .horario { grid-template-columns: 1fr 1fr; align-items: start; }
