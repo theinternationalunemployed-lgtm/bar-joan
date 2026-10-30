@@ -151,3 +151,55 @@ body.home { padding-bottom: 4rem; }
   .horario { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Pequeños acabados */
+.top { transition: box-shadow .3s; }
+.top.scrolled { box-shadow: 0 5px 18px rgba(0, 0, 0, .25); }
+.top .menu a.on { color: var(--naranja); border-color: var(--naranja); }
+.btn { transition: translate .15s, box-shadow .15s, background .2s, background-position .6s; }
+.btn:hover { translate: 0 -2px; }
+.btn:active { translate: 0 1px; }
+.galeria img, .galeria .ph { transition: scale .3s, box-shadow .3s; }
+.galeria img:hover, .galeria .ph:hover { scale: 1.03; box-shadow: 0 10px 22px rgba(0, 0, 0, .3); }
+.carta li { transition: background .2s; }
+.carta li:hover { background: rgba(255, 255, 255, .06); }
+
+/* Animaciones del bar: solo si el usuario no ha pedido reducir el movimiento */
+@media (prefers-reduced-motion: no-preference) {
+  /* La persiana metálica de la parada sube al abrir la página */
+  @keyframes persiana { to { translate: 0 -101%; } }
+  .hero { position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    background: repeating-linear-gradient(180deg, #dfe2e5 0 20px, #aab0b6 20px 23px, #7f868c 23px 25px);
+    animation: persiana .9s .15s cubic-bezier(.5, 0, .2, 1) both; }
+
+  /* El rótulo se enciende como un fluorescente (dos parpadeos lentos, sin destellos rápidos) */
+  @keyframes encender { 0% { opacity: .15; } 15% { opacity: .9; } 25%, 45% { opacity: .3; } 58% { opacity: 1; } 68% { opacity: .55; } 100% { opacity: 1; } }
+  .hero h1 { animation: encender 1.4s .85s linear both; }
+  .hero h1 { box-shadow: 0 8px 24px rgba(0, 0, 0, .35), 0 0 34px rgba(255, 220, 160, .45); }
+
+  @keyframes subir { from { opacity: 0; translate: 0 22px; } }
+  .lema, .hero .btns { animation: subir .7s cubic-bezier(.2, .7, .2, 1) both; }
+  .lema { animation-delay: 1.5s; }
+  .hero .btns { animation-delay: 1.65s; }
+
+  /* Reflejo que recorre el perfil de acero y los botones de acero */
+  @keyframes reflejo { from { background-position: -40% 0, 0 0; } to { background-position: 140% 0, 0 0; } }
+  .top::after { background: linear-gradient(100deg, transparent 42%, rgba(255, 255, 255, .95) 50%, transparent 58%) -40% 0 / 45% 100% no-repeat, var(--acero);
+    animation: reflejo 1.4s 1s ease-in-out both; }
+  .btn-alt { background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .85) 50%, transparent 60%) 150% 0 / 220% 100% no-repeat, var(--acero); }
+  .btn-alt:hover { background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .85) 50%, transparent 60%) -50% 0 / 220% 100% no-repeat, var(--acero); border-color: #8d949a; }
+
+  @keyframes entrar-abajo { from { translate: 0 100%; } }
+  .callbar { animation: entrar-abajo .5s 1.8s ease-out both; }
+
+  /* .js y .reveal los añade anim.js: sin JavaScript todo queda visible */
+  .js .reveal { opacity: 0; translate: 0 22px; transition: opacity .6s ease var(--retraso, 0ms), translate .6s cubic-bezier(.2, .7, .2, 1) var(--retraso, 0ms); }
+  .js .reveal.visible { opacity: 1; translate: 0 0; }
+
+  /* En la pizarra, cada línea se escribe de izquierda a derecha, como con tiza */
+  .js .carta > .reveal { opacity: 1; translate: 0 0; }
+  .js .carta > .reveal h3, .js .carta > .reveal li { clip-path: inset(0 100% 0 0); transition: clip-path .55s steps(14) calc(var(--i, 0) * 110ms), background .2s; }
+  .js .carta > .reveal.visible h3, .js .carta > .reveal.visible li { clip-path: inset(0 -1% 0 0); }
+}
+@media print { .js .reveal { opacity: 1; translate: 0 0; } .js .carta > .reveal h3, .js .carta > .reveal li { clip-path: none; } .hero::after { display: none; } }
